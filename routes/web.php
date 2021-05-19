@@ -15,10 +15,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/admin', function () {
-    return view('layouts.apps');
-});
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(
+    ['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'auth',],
+    function(){
+        // Route::get('dashboard', 'DashboardController@index');
+        Route::resource('employees', 'EmployeeController');
+    }
+);
