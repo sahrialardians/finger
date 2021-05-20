@@ -27,5 +27,6 @@ Route::group(
         Route::resource('opd', 'OpdController');
         Route::resource('positions', 'PositionController');
         Route::resource('attendances', 'AttendanceController');
+        Route::resource('absences', 'AbsenceController');
     }
 );
