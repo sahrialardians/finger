@@ -25,5 +25,7 @@ Route::group(
         Route::get('dashboard', 'DashboardController')->name('dashboard');
         Route::resource('employees', 'EmployeeController');
         Route::resource('opd', 'OpdController');
+        Route::resource('positions', 'PositionController');
+        Route::resource('attendances', 'AttendanceController');
     }
 );
