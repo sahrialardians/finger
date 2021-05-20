@@ -22,7 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(
     ['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'auth',],
     function(){
-        // Route::get('dashboard', 'DashboardController@index');
+        Route::get('dashboard', 'DashboardController')->name('dashboard');
         Route::resource('employees', 'EmployeeController');
         Route::resource('opd', 'OpdController');
     }
