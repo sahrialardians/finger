@@ -15,20 +15,20 @@
         </li>
         <li class="menu-header">Master Data</li>
         <li class="nav-item">
-          <a href="{{ route('employees.index') }}" class="nav-link" data-toggle="dropdown"><i class="fas fa-address-book"></i> <span>Data Pegawai</span></a>
+          <a href="{{ route('employees.index') }}" class="nav-link"><i class="fas fa-address-book"></i> <span>Data Pegawai</span></a>
         </li>
         <li class="nav-item dropdown">
           <a href="#" class="nav-link has-dropdown"><i class="fas fa-clipboard-list"></i> <span>Referensi Data</span></a>
           <ul class="dropdown-menu">
             <li><a class="nav-link" href="{{ route('opd.index') }}">Ref. Data OPD</a></li>
-            <li><a class="nav-link" href="#">Ref. Data Jabatan</a></li>
+            <li><a class="nav-link" href="{{ route('positions.index') }}">Ref. Data Jabatan</a></li>
           </ul>
         </li>
         <li class="menu-header">Presensi</li>
         <li class="nav-item dropdown">
           <a href="#" class="nav-link has-dropdown"><i class="fas fa-chart-bar"></i> <span>Transaksi Presensi</span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Data Presensi</a></li>
+            <li><a href="{{ route('attendances.index') }}">Data Presensi</a></li>
             <li><a href="#">Data Ketidakhadiran</a></li>
           </ul>
         </li>
