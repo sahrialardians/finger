@@ -24,5 +24,6 @@ Route::group(
     function(){
         // Route::get('dashboard', 'DashboardController@index');
         Route::resource('employees', 'EmployeeController');
+        Route::resource('opd', 'OpdController');
     }
 );
