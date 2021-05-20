@@ -25,7 +25,7 @@
                     <form action="{{ route('opd.store') }}" method="POST">
                         @csrf
                         
-                        <div class="form-group col-md-7">
+                        <div class="form-group">
                           <label for="name">Nama OPD</label>
                           <input type="text" class="form-control" name="name" id="name" placeholder="Nama OPD">
                         </div>

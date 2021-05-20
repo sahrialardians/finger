@@ -14,7 +14,7 @@ class OpdController extends Controller
      */
     public function index()
     {
-        return view('pages.admin.opd')
+        return view('pages.admin.opd.index');
     }
 
     /**
@@ -24,7 +24,7 @@ class OpdController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.opd.create');
     }
 
     /**

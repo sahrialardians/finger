@@ -11,18 +11,17 @@
     <ul class="sidebar-menu">
         <li class="menu-header">Dashboard</li>
         <li class="nav-item">
-          <a href="#" class="nav-link"><i class="fas fa-fire"></i><span>Dashboard</span></a>
+          <a href="{{ route('admin') }}" class="nav-link"><i class="fas fa-fire"></i><span>Dashboard</span></a>
         </li>
         <li class="menu-header">Master Data</li>
         <li class="nav-item">
-          <a href="#" class="nav-link" data-toggle="dropdown"><i class="fas fa-address-book"></i> <span>Data Pegawai</span></a>
+          <a href="{{ route('employees.index') }}" class="nav-link" data-toggle="dropdown"><i class="fas fa-address-book"></i> <span>Data Pegawai</span></a>
         </li>
         <li class="nav-item dropdown">
           <a href="#" class="nav-link has-dropdown"><i class="fas fa-clipboard-list"></i> <span>Referensi Data</span></a>
           <ul class="dropdown-menu">
-            <li><a class="nav-link" href="#">Ref. Data OPD</a></li>
+            <li><a class="nav-link" href="{{ route('opd.index') }}">Ref. Data OPD</a></li>
             <li><a class="nav-link" href="#">Ref. Data Jabatan</a></li>
-            <li><a class="nav-link" href="#">Ref. Data Presensi</a></li>
           </ul>
         </li>
         <li class="menu-header">Presensi</li>
