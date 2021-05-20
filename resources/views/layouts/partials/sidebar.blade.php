@@ -29,7 +29,7 @@
           <a href="#" class="nav-link has-dropdown"><i class="fas fa-chart-bar"></i> <span>Transaksi Presensi</span></a>
           <ul class="dropdown-menu">
             <li><a href="{{ route('attendances.index') }}">Data Presensi</a></li>
-            <li><a href="#">Data Ketidakhadiran</a></li>
+            <li><a href="{{ route('absences.index') }}">Data Ketidakhadiran</a></li>
           </ul>
         </li>
         <li><a class="nav-link" href="#"><i class="fas fa-paste"></i> <span>Laporan Presensi</span></a></li>
