@@ -32,7 +32,7 @@
             <li><a href="{{ route('absences.index') }}">Data Ketidakhadiran</a></li>
           </ul>
         </li>
-        <li><a class="nav-link" href="#"><i class="fas fa-paste"></i> <span>Laporan Presensi</span></a></li>
+        <li><a class="nav-link" href="{{ route('reports.index') }}"><i class="fas fa-paste"></i> <span>Laporan Presensi</span></a></li>
         
         <li class="menu-header">Users</li>
         <li class="nav-item">
