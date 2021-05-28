@@ -138,3 +138,7 @@
     </div>
 </section>
 @endsection
+
+@push('script')
+  <script src="{{ asset('backend/js/custome-chart.js') }}"></script>    
+@endpush

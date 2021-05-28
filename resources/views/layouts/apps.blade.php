@@ -11,6 +11,9 @@
 
     {{-- Styles --}}
     @include('layouts.partials.styles')
+
+    <!-- Page Specific CSS File -->
+    @stack('style')
 </head>
 
 <body>
@@ -45,5 +48,6 @@
   @include('layouts.partials.scripts')
 
   <!-- Page Specific JS File -->
+  @stack('script')
 </body>
 </html>

@@ -12,5 +12,3 @@
 <!-- Template JS File -->
 <script src="{{ asset('backend/js/scripts.js') }}"></script>
 <script src="{{ asset('backend/js/custom.js') }}"></script>
-
-<script src="{{ asset('backend/js/custome-chart.js') }}"></script>
