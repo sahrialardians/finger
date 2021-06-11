@@ -7,7 +7,7 @@
     <div class="section-header">
       <h1>Data Jabatan</h1>
       <div class="section-header-breadcrumb">
-        <div class="breadcrumb-item active"><a href="{{ url('admin') }}">Dashboard</a></div>
+        <div class="breadcrumb-item active"><a href="{{ url('admin/dashboard') }}">Dashboard</a></div>
         <div class="breadcrumb-item">Data Jabatan</div>
       </div>
     </div>
@@ -20,6 +20,35 @@
 
       <div class="row">
         <div class="col-12">
+          @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-block">
+              <strong>{{ $message }}</strong>
+            </div>
+          @endif
+
+          @if ($message = Session::get('error'))
+            <div class="alert alert-danger alert-block">
+              <strong>{{ $message }}</strong>
+            </div>
+          @endif
+
+          @if ($message = Session::get('warning'))
+            <div class="alert alert-warning alert-block">
+              <strong>{{ $message }}</strong>
+          </div>
+          @endif
+
+          @if ($message = Session::get('info'))
+            <div class="alert alert-info alert-block">
+              <strong>{{ $message }}</strong>
+            </div>
+          @endif
+
+          @if ($errors->any())
+            <div class="alert alert-danger">
+            Please check the form below for errors
+          </div>
+          @endif
           <div class="card">
             <div class="card-header">
               <a href="{{ route('positions.create') }}" class="btn btn-lg btn-primary">Tambah Data</a>
@@ -32,51 +61,35 @@
                       <th class="text-center">
                         #
                     </th>
-                      <th>Jabatan</th>
+                      <th>Jabatan / Posisi</th>
                       <th>Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
+                    @forelse ($positions as $position)
                     <tr>
+                      <td>{{ $position->id }}</td>
+                      <td>{{ $position->name }}</td>
                       <td>
-                        1
-                      </td>
-                      <td>Kepala Dinas</td>
-                      <td>
-                        <a href="#" class="btn btn-info">Edit</a>
-                        <a href="#" class="btn btn-danger">Hapus</a>
+                        <a href="{{ route('positions.edit', $position->id) }}" class="btn btn-info">
+                          <i class="fa fa-pencil-alt"></i>    
+                        </a>     
+                        <form action="{{ route('positions.destroy', $position->id) }}" method="post" class="d-inline">
+                            @csrf
+                            @method('delete')
+                            <button class="btn btn-danger">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </form>
                       </td>
                     </tr>
+                    @empty
                     <tr>
-                      <td>
-                        2
-                      </td>
-                      <td>Kepala Badan</td>
-                      <td>
-                        <a href="#" class="btn btn-info">Edit</a>
-                        <a href="#" class="btn btn-danger">Hapus</a>
-                      </td>
+                        <td colspan="7" class="text-center">
+                            Data Kosong
+                        </td>
                     </tr>
-                    <tr>
-                      <td>
-                        3
-                      </td>
-                      <td>Kepala Seksi</td>
-                      <td>
-                        <a href="#" class="btn btn-info">Edit</a>
-                        <a href="#" class="btn btn-danger">Hapus</a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        4
-                      </td>
-                      <td>Sekretaris</td>
-                      <td>
-                        <a href="#" class="btn btn-info">Edit</a>
-                        <a href="#" class="btn btn-danger">Hapus</a>
-                      </td>
-                    </tr>
+                    @endforelse
                   </tbody>
                 </table>
               </div>
