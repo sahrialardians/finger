@@ -8,9 +8,9 @@
     <div class="section-header">
       <h1>Data Jabatan</h1>
       <div class="section-header-breadcrumb">
-        <div class="breadcrumb-item active"><a href="{{ url('admin') }}">Dashboard</a></div>
+        <div class="breadcrumb-item active"><a href="{{ url('admin/dashboard') }}">Dashboard</a></div>
         <div class="breadcrumb-item active"><a href="{{ route('positions.index') }}">Data Jabatan</a></div>
-        <div class="breadcrumb-item">Form Data Jabatan</div>
+        <div class="breadcrumb-item">Form Eidt Data Jabatan</div>
       </div>
     </div>
 
@@ -22,12 +22,13 @@
                     <h4>Tambah Jabatan</h4>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('positions.store') }}" method="POST">
+                    <form action="{{ route('positions.update', $position->id) }}" method="POST">
                         @csrf
+                        @method('PUT')
                         
                         <div class="form-group">
                           <label for="name">Jabatan</label>
-                          <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="Nama Jabatan">
+                          <input type="text" class="form-control @error('name') is-invalid @enderror" value="{{ $position->name }}" name="name" id="name" placeholder="Nama Jabatan">
 
                           @error('name')
                               <span class="invalid-feedback" role="alert">
