@@ -6,11 +6,11 @@
 
 <section class="section">
     <div class="section-header">
-      <h1>Data User</h1>
+      <h1>Form Data User</h1>
       <div class="section-header-breadcrumb">
         <div class="breadcrumb-item active"><a href="{{ url('admin/dashboard') }}">Dashboard</a></div>
         <div class="breadcrumb-item active"><a href="{{ route('users.index') }}">Data Users</a></div>
-        <div class="breadcrumb-item">Form Data User</div>
+        <div class="breadcrumb-item">Form Edit Data User</div>
       </div>
     </div>
 

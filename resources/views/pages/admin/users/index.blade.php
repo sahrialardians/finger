@@ -46,9 +46,9 @@
                       <td>{{ $user->email }}</td>
                       <td>0</td>
                       <td>
-                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info">
+                        {{-- <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info">
                             <i class="fa fa-pencil-alt"></i>    
-                        </a>     
+                        </a>      --}}
                         <form action="{{ route('users.destroy', $user->id) }}" method="post" class="d-inline">
                             @csrf
                             @method('delete')
