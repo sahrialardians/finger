@@ -29,5 +29,7 @@ Route::group(
         Route::resource('attendances', 'AttendanceController');
         Route::resource('absences', 'AbsenceController');
         Route::resource('reports', 'ReportAttendanceController');
+        Route::resource('roles', 'RoleController');
+        Route::resource('permissions', 'PermissionController');
     }
 );
