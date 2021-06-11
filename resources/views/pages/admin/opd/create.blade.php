@@ -27,9 +27,15 @@
                         
                         <div class="form-group">
                           <label for="name">Nama OPD</label>
-                          <input type="text" class="form-control" name="name" id="name" placeholder="Nama OPD">
+                          <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="Nama OPD">
                         </div>
-                        
+
+                        @error('name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+
                         <button type="submit" class="btn btn-lg btn-primary">Simpan</button>
                         <a href="{{ route('opd.index') }}" class="btn btn-lg btn-light ml-2">Cancel</a>
                       </form>
