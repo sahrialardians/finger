@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Position;
+use App\Http\Requests\Admin\PositionRequest;
 
 class PositionController extends Controller
 {
@@ -14,7 +16,8 @@ class PositionController extends Controller
      */
     public function index()
     {
-        return view('pages.admin.positions.index');
+        $positions = Position::all();
+        return view('pages.admin.positions.index', compact('positions'));
     }
 
     /**
@@ -33,9 +36,12 @@ class PositionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PositionRequest $request)
     {
-        //
+        $data = $request->all();
+
+        Position::create($data);
+        return redirect()->route('positions.index')->with(['success' => 'Berhasil menambahkan data.']);
     }
 
     /**
@@ -57,7 +63,11 @@ class PositionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $position = Position::findOrfail($id);
+
+        return view('pages.admin.positions.edit', [
+            'position' => $position
+        ]);
     }
 
     /**
@@ -67,9 +77,14 @@ class PositionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PositionRequest $request, $id)
     {
-        //
+        $data = $request->all();
+
+        $position = Position::findOrFail($id);
+        $position->update($data);
+        
+        return redirect()->route('positions.index')->with(['success' => 'Berhasil mengubah data.']);
     }
 
     /**
@@ -80,6 +95,9 @@ class PositionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $position = Position::findOrFail($id);
+        $position->delete();
+
+        return redirect()->route('positions.index')->with(['success' => 'Berhasil menghapus data.']);
     }
 }
