@@ -27,7 +27,13 @@
                         
                         <div class="form-group">
                           <label for="name">Jabatan</label>
-                          <input type="text" class="form-control" name="name" id="name" placeholder="Nama Jabatan">
+                          <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="Nama Jabatan">
+
+                          @error('name')
+                              <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                              </span>
+                          @enderror
                         </div>
                         
                         <button type="submit" class="btn btn-lg btn-primary">Simpan</button>
