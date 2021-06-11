@@ -45,7 +45,7 @@
         </li>
 
         <li class="nav-item">
-          <a href="#" class="nav-link"><i class="fas fa-users"></i> <span>Management Users</span></a>
+          <a href="{{ route('users.index') }}" class="nav-link"><i class="fas fa-users"></i> <span>Management Users</span></a>
         </li>
       </ul>
 
