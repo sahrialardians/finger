@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Opd;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\Admin\OpdRequest;
 
 class OpdController extends Controller
 {
@@ -14,7 +16,8 @@ class OpdController extends Controller
      */
     public function index()
     {
-        return view('pages.admin.opd.index');
+        $opds = Opd::all();
+        return view('pages.admin.opd.index', compact('opds'));
     }
 
     /**
@@ -33,9 +36,12 @@ class OpdController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(OpdRequest $request)
     {
-        //
+        $data = $request->all();
+
+        Opd::create($data);
+        return redirect()->route('opd.index')->with(['success' => 'Berhasil menambahkan data.']);
     }
 
     /**
@@ -57,7 +63,11 @@ class OpdController extends Controller
      */
     public function edit($id)
     {
-        //
+        $item = Opd::findOrfail($id);
+
+        return view('pages.admin.opd.edit', [
+            'item' => $item
+        ]);
     }
 
     /**
@@ -67,9 +77,14 @@ class OpdController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(OpdRequest $request, $id)
     {
-        //
+        $data = $request->all();
+
+        $item = Opd::findOrFail($id);
+        $item->update($data);
+        
+        return redirect()->route('opd.index')->with(['success' => 'Berhasil mengubah data.']);
     }
 
     /**
@@ -80,6 +95,9 @@ class OpdController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = Opd::findOrFail($id);
+        $item->delete();
+
+        return redirect()->route('opd.index')->with(['success' => 'Berhasil menghapus data.']);
     }
 }
