@@ -33,11 +33,17 @@
           </ul>
         </li>
         <li><a class="nav-link" href="{{ route('reports.index') }}"><i class="fas fa-paste"></i> <span>Laporan Presensi</span></a></li>
+
+        <li class="menu-header">Pengaturan</li>
         
-        <li class="menu-header">Users</li>
-        <li class="nav-item">
-          <a href="#" class="nav-link"><i class="fas fa-key"></i> <span>Role & Permissions</span></a>
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link has-dropdown"><i class="fas fa-key"></i> <span>Role & Permissions</span></a>
+          <ul class="dropdown-menu">
+            <li><a href="{{ route('roles.index') }}">Roles</a></li>
+            <li><a href="{{ route('permissions.index') }}">Permissions</a></li>
+          </ul>
         </li>
+
         <li class="nav-item">
           <a href="#" class="nav-link"><i class="fas fa-users"></i> <span>Management Users</span></a>
         </li>
@@ -45,7 +51,7 @@
 
       <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
         <a href="#" class="btn btn-primary btn-lg btn-block btn-icon-split">
-          <i class="fas fa-rocket"></i> Settings
+          <i class="fas fa-rocket"></i> Profile
         </a>
       </div>
   </aside>
