@@ -6,9 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Position;
 use App\Http\Requests\Admin\PositionRequest;
+use App\Traits\AuthorizableTrait;
 
 class PositionController extends Controller
 {
+    use AuthorizableTrait;
+
     /**
      * Display a listing of the resource.
      *
