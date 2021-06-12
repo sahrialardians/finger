@@ -1,5 +1,6 @@
 <?php
     namespace App\Traits;
+    use Illuminate\Support\Arr;
 
     trait AuthorizableTrait
     {
@@ -32,7 +33,7 @@
         public function getAbility($method)
         {
             $routeName = explode('.', \Request::route()->getName());
-            $action = array_get($this->getAbilities(), $method);
+            $action = Arr::get($this->getAbilities(), $method);
 
             return $action ? $action . '_' . $routeName[0] : null;
         }
