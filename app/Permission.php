@@ -19,7 +19,17 @@ class Permission extends \Spatie\Permission\Models\Permission
             'view_roles',
             'add_roles',
             'edit_roles',
-            'delete_roles'
+            'delete_roles',
+
+            'view_opds',
+            'add_opds',
+            'edit_opds',
+            'delete_opds',
+            
+            'view_positions',
+            'add_positions',
+            'edit_positions',
+            'delete_positions',
         ];
     }
 }
