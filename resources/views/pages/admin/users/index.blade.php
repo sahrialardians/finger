@@ -44,7 +44,7 @@
                       <td>{{ $user->id }}</td>
                       <td>{{ $user->name }}</td>
                       <td>{{ $user->email }}</td>
-                      <td>0</td>
+                      <td>{{ $user->role_id }}</td>
                       <td>
                         {{-- <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info">
                             <i class="fa fa-pencil-alt"></i>    
