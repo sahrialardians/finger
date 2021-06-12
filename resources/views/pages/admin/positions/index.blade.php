@@ -20,40 +20,43 @@
 
       <div class="row">
         <div class="col-12">
-          @if ($message = Session::get('success'))
-            <div class="alert alert-success alert-block">
-              <strong>{{ $message }}</strong>
-            </div>
-          @endif
-
-          @if ($message = Session::get('error'))
-            <div class="alert alert-danger alert-block">
-              <strong>{{ $message }}</strong>
-            </div>
-          @endif
-
-          @if ($message = Session::get('warning'))
-            <div class="alert alert-warning alert-block">
-              <strong>{{ $message }}</strong>
-          </div>
-          @endif
-
-          @if ($message = Session::get('info'))
-            <div class="alert alert-info alert-block">
-              <strong>{{ $message }}</strong>
-            </div>
-          @endif
-
-          @if ($errors->any())
-            <div class="alert alert-danger">
-            Please check the form below for errors
-          </div>
-          @endif
           <div class="card">
+            @can('add_positions')
             <div class="card-header">
               <a href="{{ route('positions.create') }}" class="btn btn-lg btn-primary">Tambah Data</a>
             </div>
+            @endcan
             <div class="card-body">
+              @if ($message = Session::get('success'))
+                <div class="alert alert-success alert-block">
+                  <strong>{{ $message }}</strong>
+                </div>
+              @endif
+    
+              @if ($message = Session::get('error'))
+                <div class="alert alert-danger alert-block">
+                  <strong>{{ $message }}</strong>
+                </div>
+              @endif
+    
+              @if ($message = Session::get('warning'))
+                <div class="alert alert-warning alert-block">
+                  <strong>{{ $message }}</strong>
+              </div>
+              @endif
+    
+              @if ($message = Session::get('info'))
+                <div class="alert alert-info alert-block">
+                  <strong>{{ $message }}</strong>
+                </div>
+              @endif
+    
+              @if ($errors->any())
+                <div class="alert alert-danger">
+                Please check the form below for errors
+              </div>
+              @endif
+              
               <div class="table-responsive">
                 <table class="table table-striped" id="table-1">
                   <thead>
@@ -71,9 +74,12 @@
                       <td>{{ $position->id }}</td>
                       <td>{{ $position->name }}</td>
                       <td>
+                        @can('edit_positions')
                         <a href="{{ route('positions.edit', $position->id) }}" class="btn btn-info">
                           <i class="fa fa-pencil-alt"></i>    
                         </a>     
+                        @endcan
+                        @can('delete_positions')
                         <form action="{{ route('positions.destroy', $position->id) }}" method="post" class="d-inline">
                             @csrf
                             @method('delete')
@@ -81,6 +87,7 @@
                                 <i class="fa fa-trash"></i>
                             </button>
                         </form>
+                        @endcan
                       </td>
                     </tr>
                     @empty
