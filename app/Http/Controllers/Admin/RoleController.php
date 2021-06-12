@@ -52,7 +52,11 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-        //
+        $role = Role::with(['permissions'])->findOrfail($id);
+
+        return view('pages.admin.roles.detail', [
+            'role' => $role
+        ]);
     }
 
     /**
