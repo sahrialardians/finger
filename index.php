@@ -2,7 +2,10 @@
 
 require 'zklibrary.php';
 
-$zk = new ZKLibrary('192.168.1.102', 4370);
+$ip_address = '192.168.100.207';
+$port = '4370';
+
+$zk = new ZKLibrary($ip_address, $port);
 $zk->connect();
 $zk->disableDevice();
 
