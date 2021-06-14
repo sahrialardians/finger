@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\OpdRequest;
+use App\Traits\AuthorizableTrait;
+use App\Role;
+use App\Permission;
 
 class RoleController extends Controller
 {
+    use AuthorizableTrait;
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +20,8 @@ class RoleController extends Controller
     public function index()
     {
         $roles = Role::all();
-        return view('pages.admin.roles.index', compact('roles'));
+        $permissions = Permission::all();
+        return view('pages.admin.roles.index', compact('roles', 'permissions'));
     }
 
     /**
@@ -36,12 +40,20 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(OpdRequest $request)
+    public function store(Request $request)
     {
-        $data = $request->all();
+        // $data = $request->all();
 
-        Role::create($data);
-        return redirect()->route('roles.index')->with(['success' => 'Berhasil menambahkan data.']);
+        // Role::create($data);
+        // return redirect()->route('roles.index')->with(['success' => 'Berhasil menambahkan data.']);
+        
+        $this->validate($request, ['name' => 'required|unique:roles']);
+
+        if( Role::create($request->only('name')) ) {
+            with(['success' => 'Berhasil menambahkan data.']);
+        }
+
+        return redirect()->back();
     }
 
     /**
@@ -67,11 +79,11 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        $role = Role::findOrfail($id);
+        // $role = Role::findOrfail($id);
 
-        return view('pages.admin.roles.edit', [
-            'role' => $role
-        ]);
+        // return view('pages.admin.roles.edit', [
+        //     'role' => $role
+        // ]);
     }
 
     /**
@@ -81,14 +93,23 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(OpdRequest $request, $id)
-    {
-        $data = $request->all();
+    public function update(Request $request, $id)
+    {        
+        if($role = Role::findOrFail($id)) {
+            // superadmin role has everything
+            if($role->name === 'Superadmin') {
+                $role->syncPermissions(Permission::all());
+                return redirect()->route('roles.index');
+            }
 
-        $role = Role::findOrFail($id);
-        $role->update($data);
-        
-        return redirect()->route('roles.index')->with(['success' => 'Berhasil mengubah data.']);
+            $permissions = $request->get('permissions', []);
+            $role->syncPermissions($permissions);
+            flash( $role->name . ' permissions has been updated.');
+        } else {
+            flash()->error( 'Role with id '. $id .' note found.');
+        }
+
+        return redirect()->route('roles.index');
     }
 
     /**

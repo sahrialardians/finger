@@ -1,14 +1,14 @@
 @extends('layouts.apps')
 
-@section('title', 'Data Pegawai')
+@section('title', 'Role & Permissions')
 
 @section('content')
 <section class="section">
     <div class="section-header">
-      <h1>Data Roles</h1>
+      <h1>Role & Permissions</h1>
       <div class="section-header-breadcrumb">
         <div class="breadcrumb-item active"><a href="{{ url('admin/dashboard') }}">Dashboard</a></div>
-        <div class="breadcrumb-item">Data Roles</div>
+        <div class="breadcrumb-item">Role & Permissions</div>
       </div>
     </div>
 
@@ -17,85 +17,34 @@
       <p class="section-lead">
         We use 'DataTables' made by @SpryMedia. You can check the full documentation <a href="https://datatables.net/">here</a>.
       </p> --}}
-
-      <div class="row">
+      
+    <div class="row">
+      
         <div class="col-12">
-          @if ($message = Session::get('success'))
-            <div class="alert alert-success alert-block">
-              <strong>{{ $message }}</strong>
-            </div>
-          @endif
-
-          @if ($message = Session::get('error'))
-            <div class="alert alert-danger alert-block">
-              <strong>{{ $message }}</strong>
-            </div>
-          @endif
-
-          @if ($message = Session::get('warning'))
-            <div class="alert alert-warning alert-block">
-              <strong>{{ $message }}</strong>
-          </div>
-          @endif
-
-          @if ($message = Session::get('info'))
-            <div class="alert alert-info alert-block">
-              <strong>{{ $message }}</strong>
-            </div>
-          @endif
-
-          @if ($errors->any())
-            <div class="alert alert-danger">
-            Please check the form below for errors
-          </div>
-          @endif
           <div class="card">
+            @can('add_roles')
             <div class="card-header">
-              <a href="{{ route('roles.create') }}" class="btn btn-lg btn-primary">Tambah Data</a>
+              <a href="#" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#exampleModal">Tambah Role</a>
             </div>
+            @endcan
             <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-striped" id="table-1">
-                  <thead>
-                    <tr>
-                      <th class="text-center">
-                        #
-                    </th>
-                      <th>Roles</th>
-                      <th>Guard</th>
-                      <th>Aksi</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    @forelse ($roles as $role)
-                    <tr>
-                      <td>
-                        {{ $role->id }}
-                      </td>
-                      <td>{{ $role->name }}</td>
-                      <td>{{ $role->guard_name }}</td>
-                      <td>
-                        <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-info">
-                          <i class="fa fa-pencil-alt"></i>    
-                        </a>     
-                        <form action="{{ route('roles.destroy', $role->id) }}" method="post" class="d-inline">
-                            @csrf
-                            @method('delete')
-                            <button class="btn btn-danger">
-                                <i class="fa fa-trash"></i>
-                            </button>
-                        </form>
-                      </td>
-                    </tr>
-                    @empty
-                    <tr>
-                        <td colspan="7" class="text-center">
-                            Data Kosong
-                        </td>
-                    </tr>
-                    @endforelse
-                  </tbody>
-                </table>
+              <div id="accordion-role-permissions">
+                <div class="accordion">
+                  @forelse ($roles as $role)
+                      {!! Form::model($role, ['method' => 'PUT', 'route' => ['roles.update',  $role->id ], 'class' => 'm-b']) !!}
+    
+                      @if($role->name === 'Superadmin')
+                          @include('layouts.partials.permissions', ['title' => $role->name .' Permissions', 'options' => ['disabled'], 'showButton' => true])
+                      @else
+                          @include('layouts.partials.permissions', ['title' => $role->name .' Permissions', 'model' => $role, 'showButton' => true])
+                      @endif
+    
+                      {!! Form::close() !!}
+    
+                  @empty
+                      <p>No Roles defined, please run <code>php artisan db:seed</code> to seed some dummy data.</p>
+                  @endforelse
+                </div>
               </div>
             </div>
           </div>
@@ -103,4 +52,33 @@
       </div>
     </div>
   </section>
+  <div class="modal fade" tabindex="-1" role="dialog" id="exampleModal">
+    <div class="modal-dialog" role="document">
+    {!! Form::open(['method' => 'post']) !!}
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Tambah Role</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <!-- name Form Input -->
+            <div class="form-group @if ($errors->has('name')) has-error @endif">
+                {!! Form::label('name', 'Name') !!}
+                {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Role Name']) !!}
+                @if ($errors->has('name')) <p class="help-block">{{ $errors->first('name') }}</p> @endif
+            </div>
+        </div>
+        <div class="modal-footer bg-whitesmoke br">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+    
+          <!-- Submit Form Button -->
+          {!! Form::submit('Simpan', ['class' => 'btn btn-primary']) !!}
+        </div>
+      </div>
+    {!! Form::close() !!}
+    </div>
+  </div>
+</div>
 @endsection

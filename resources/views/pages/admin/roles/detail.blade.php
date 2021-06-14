@@ -51,7 +51,7 @@
           @endif
           <div class="card">
             <div class="card-header">
-              <a href="{{ route('roles.create') }}" class="btn btn-lg btn-primary">Tambah Data</a>
+              <a href="{{ route('roles.index') }}" class="btn btn-lg btn-primary">Back</a>
             </div>
             <div class="card-body">
               <div class="table-responsive">
