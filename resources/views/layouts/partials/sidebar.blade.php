@@ -35,7 +35,7 @@
         <li><a class="nav-link" href="{{ route('reports.index') }}"><i class="fas fa-paste"></i> <span>Laporan Presensi</span></a></li>
 
         <li class="menu-header">Pengaturan</li>
-        
+        <li><a class="nav-link" href="{{ route('devices.index') }}"><i class="fas fa-digital-tachograph"></i> <span>Devices</span></a></li>
         <li class="nav-item dropdown">
           <a href="#" class="nav-link has-dropdown"><i class="fas fa-key"></i> <span>Role & Permissions</span></a>
           <ul class="dropdown-menu">
