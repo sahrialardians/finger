@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Device;
 
 class AttendanceController extends Controller
 {
@@ -14,7 +15,8 @@ class AttendanceController extends Controller
      */
     public function index()
     {
-        return view('pages.admin.attendances.index');
+        $devices = Device::all();
+        return view('pages.admin.attendances.index', compact('devices'));
     }
 
     /**
