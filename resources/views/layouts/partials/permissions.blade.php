@@ -30,14 +30,5 @@
         @can('edit_roles')
         {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
         @endcan
-        @can('delete_roles')
-        <form action="{{ route('roles.destroy', $role->id) }}" method="post" class="d-inline">
-            @csrf
-            @method('delete')
-            <button class="btn btn-light">
-                Delete
-            </button>
-        </form>
-        @endcan
     </div>
 </div>

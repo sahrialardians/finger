@@ -19,7 +19,6 @@
       </p> --}}
       
     <div class="row">
-      
         <div class="col-12">
           <div class="card">
             @can('add_roles')
@@ -31,6 +30,8 @@
               <div id="accordion-role-permissions">
                 <div class="accordion">
                   @forelse ($roles as $role)
+                  <div class="row">
+                    <div class="col-11">
                       {!! Form::model($role, ['method' => 'PUT', 'route' => ['roles.update',  $role->id ], 'class' => 'm-b']) !!}
     
                       @if($role->name === 'Superadmin')
@@ -38,8 +39,21 @@
                       @else
                           @include('layouts.partials.permissions', ['title' => $role->name .' Permissions', 'model' => $role, 'showButton' => true])
                       @endif
-    
+
                       {!! Form::close() !!}
+                    </div>
+                    <div class="col-1 mt-1">
+                      @can('delete_roles')
+                      <form action="{{ route('roles.destroy', $role->id) }}" method="post" class="d-inline">
+                          @csrf
+                          @method('delete')
+                          <button onclick="confirm('Apakah anda yakin ingin menghapus Role ini?')" class="badge badge-pill badge-danger border-0">
+                            <i class="fas fa-times"></i>
+                          </button>
+                      </form>
+                      @endcan
+                    </div>
+                  </div>
     
                   @empty
                       <p>No Roles defined, please run <code>php artisan db:seed</code> to seed some dummy data.</p>
@@ -82,3 +96,4 @@
   </div>
 </div>
 @endsection
+
