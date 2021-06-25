@@ -1,4 +1,4 @@
-name: Si-akrab Laravel with AWS EC2
+name: Si-akrab Laravel with AWS EC2 and AWS CodeDeploy
 
 on:
   push:
